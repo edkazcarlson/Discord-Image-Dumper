@@ -16,6 +16,7 @@ import java.awt.event.KeyEvent;
 import java.net.URL;
 import java.util.Scanner;
 import javax.swing.*;
+import sun.nio.ch.IOUtil;
 public class RitsuSpamCode {
 	 
     public static void main(String[] args)throws IOException,
@@ -140,9 +141,16 @@ public class RitsuSpamCode {
     }
     
     public static String chooseFolder() throws FileNotFoundException{
+        File test = new File(".");
+           for(String fileNames : test.list()) System.out.println(fileNames);
         File chosenFolder = new File("C:"); //reads old dump file location, preps for UI
-        URL txtURL = RitsuSpamCode.class.getClassLoader().getResource("ritsuspamcode/FileLoc.txt");
-        File txtFile = new File (txtURL.getFile());
+        //URL txtURL = RitsuSpamCode.class.getClassLoader().getResource("ritsuspamcode/FileLoc.txt");
+        //InputStream in = this.getClass().getClassLoader().getResourceAsStream("FileLoc.txt");
+        //OutputStream out = new FileOutputStream(txtFile);
+        //IOUtils.copy(in, out);
+        //File txtFile = new File (txtURL.getFile());
+        File txtFile = new File ("C:\\Users\\Edward Carlson\\Desktop\\test.txt");
+        System.out.println(txtFile.exists());
         Scanner fileRead = new Scanner(txtFile);
         if (fileRead.hasNextLine()){
             chosenFolder = new File(fileRead.nextLine());
