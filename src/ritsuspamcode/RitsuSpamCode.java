@@ -12,6 +12,7 @@ package ritsuspamcode;
 import java.io.*;
 import java.awt.AWTException;
 import java.awt.Robot;
+import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -42,6 +43,8 @@ public class RitsuSpamCode {
     
     public static void writeProgress(int i, String folderSize, Robot rob){
         rob.setAutoDelay(50);
+        rob.mousePress(InputEvent.BUTTON1_DOWN_MASK);
+        rob.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
         Integer iInt = new Integer(i);
         String iString = iInt.toString();
         for (int j = 0 ; j < iString.length(); j++){
@@ -141,12 +144,14 @@ public class RitsuSpamCode {
         }
     }
     
-    public static String chooseFolder() throws FileNotFoundException, MalformedURLException{
+    public static String chooseFolder() throws FileNotFoundException, MalformedURLException, IOException{
+        System.out.println(System.getProperty("user.dir") +"hi");
         File test = new File(".");
            for(String fileNames : test.list()) System.out.println(fileNames);
         File chosenFolder = null; //reads old dump file location, preps for UI
         //URL txtURL = new URL("C:\\Users\\Edward Carlson\\Documents\\RitsuSpamCode\\build\\classes\\ritsuspamcode");
-        //URL txtURL = RitsuSpamCode.class.getResource("ritsuspamcode/FileLoc.txt");
+        URL txtURL = RitsuSpamCode.class.getResource("test3.txt");
+        System.out.println(txtURL +"url");
 //InputStream in = this.getClass().getClassLoader().getResourceAsStream("FileLoc.txt");
         //OutputStream out = new FileOutputStream(txtFile);
         //IOUtils.copy(in, out);
@@ -154,10 +159,10 @@ public class RitsuSpamCode {
         //System.out.println(txtURL +"Hi");
         //File txtFile = new File (txtURL.getFile()); 
         File txtFile = new File
-                ("build\\classes\\ritsuspamcode\\FileLoc.txt");
+             ("build\\classes\\ritsuspamcode\\FileLoc.txt");
         //File txtFile = new File ("C:\\Users\\Edward Carlson\\Desktop\\test.txt");
         System.out.println(txtFile.exists());
-        System.out.println(System.getProperty("user.dir") +"hi");
+        
         Scanner fileRead = new Scanner(txtFile);
         if (fileRead.hasNextLine()){
             chosenFolder = new File(fileRead.nextLine());
